@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Giới thiệu về Tổ 4</title>
+    <!-- Thêm liên kết tới thư viện AOS và font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset margin và padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        .header {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+        .group-photo {
+            width: 100%;
+            height: auto;
+        }
+        .header-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .header-text h1 {
+            margin: 0;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        .header-text p {
+            font-size: 1.2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 20px;
+            padding: 40px;
+        }
+        .member-card {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .member-card:hover {
+            transform: scale(1.05);
+        }
+        .member-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+        .member-card h2 {
+            position: absolute;
+            bottom: 0;
+            margin: 0;
+            padding: 10px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        /* Định dạng modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 80px auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+        }
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .member-details {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .member-details img {
+            flex: 1 1 200px;
+            max-width: 200px;
+            margin-right: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .member-details div {
+            flex: 2 1 300px;
+        }
+        .social-links a {
+            margin-right: 10px;
+            color: #333;
+            font-size: 1.5em;
+        }
+        .social-links a:hover {
+            color: #0077b5; /* Màu xanh LinkedIn */
+        }
+        /* Phần liên hệ */
+        .contact-section {
+            background-color: #f1f1f1;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .contact-section h2 {
+            margin-bottom: 30px;
+        }
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #34495e;
+        }
+        @media (max-width: 600px) {
+            .header-text h1 {
+                font-size: 2em;
+            }
+            .member-details {
+                flex-direction: column;
+            }
+            .member-details img {
+                margin: 0 auto 20px auto;
+            }
+            .member-details div {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Phần header với ảnh nhóm -->
+    <div class="header">
+        <img src="hinh_anh_to4.jpg" alt="Ảnh Tổ 4" class="group-photo">
+        <div class="header-text" data-aos="fade-down">
+            <h1>Giới thiệu về Tổ 4</h1>
+            <p>Chúng tôi là Tổ 4 – một tập thể đoàn kết và sáng tạo, luôn nỗ lực để chinh phục những thử thách mới.</p>
+        </div>
+    </div>
+
+    <!-- Lưới thành viên -->
+    <div class="member-grid">
+        <!-- Lặp lại cho 12 thành viên -->
+        <div class="member-card" onclick="openModal(1)" data-aos="zoom-in">
+            <img src="hinh_anh_thanh_vien1.jpg" alt="Thành viên 1">
+            <h2>Thành viên 1</h2>
+        </div>
+        <div class="member-card" onclick="openModal(2)" data-aos="zoom-in">
+            <img src="hinh_anh_thanh_vien2.jpg" alt="Thành viên 2">
+            <h2>Thành viên 2</h2>
+        </div>
+        <div class="member-card" onclick="openModal(3)" data-aos="zoom-in">
+            <img src="hinh_anh_thanh_vien3.jpg" alt="Thành viên 3">
+            <h2>Thành viên 3</h2>
+        </div>
+        <!-- Thêm các thẻ member-card cho các thành viên còn lại -->
+        <!-- Thêm thẻ cho thành viên 4 đến 12 -->
+        <!-- Giả sử chúng ta đã thêm đủ 12 thẻ -->
+    </div>
+
+    <!-- Modal cho từng thành viên -->
+    <!-- Modal cho thành viên 1 -->
+    <div id="modal-1" class="modal">
+        <div class="modal-content" data-aos="fade-up">
+            <span class="close" onclick="closeModal(1)">&times;</span>
+            <div class="member-details">
+                <img src="hinh_anh_thanh_vien1.jpg" alt="Thành viên 1">
+                <div>
+                    <h2>Thành viên 1</h2>
+                    <p>Thông tin chi tiết về Thành viên 1. Bạn có thể thêm mô tả về sở thích, kỹ năng, và đóng góp của thành viên này cho Tổ 4.</p>
+                    <!-- Liên kết mạng xã hội -->
+                    <div class="social-links">
+                        <a href="https://facebook.com/username1" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.linkedin.com/in/username1" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:email1@example.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cho thành viên 2 -->
+    <div id="modal-2" class="modal">
+        <div class="modal-content" data-aos="fade-up">
+            <span class="close" onclick="closeModal(2)">&times;</span>
+            <div class="member-details">
+                <img src="hinh_anh_thanh_vien2.jpg" alt="Thành viên 2">
+                <div>
+                    <h2>Thành viên 2</h2>
+                    <p>Thông tin chi tiết về Thành viên 2.</p>
+                    <!-- Liên kết mạng xã hội -->
+                    <div class="social-links">
+                        <a href="https://facebook.com/username2" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.linkedin.com/in/username2" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:email2@example.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tiếp tục thêm modal cho các thành viên còn lại từ 3 đến 12 -->
+
+    <!-- Phần liên hệ -->
+    <div class="contact-section" id="contact">
+        <h2 data-aos="fade-right">Liên hệ với chúng tôi</h2>
+        <div class="contact-form" data-aos="fade-left">
+            <form action="#" method="post">
+                <label for="name">Tên của bạn:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email của bạn:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Tin nhắn:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button type="submit">Gửi tin nhắn</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Thêm thư viện AOS và script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        function openModal(id) {
+            document.getElementById('modal-' + id).style.display = 'block';
+        }
+        function closeModal(id) {
+            document.getElementById('modal-' + id).style.display = 'none';
+        }
+        // Đóng modal khi người dùng click bên ngoài modal-content
+        window.onclick = function(event) {
+            for (let i = 1; i <= 12; i++) {
+                let modal = document.getElementById('modal-' + i);
+                if (modal && event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        }
+    </script>
+
+    <!-- Thêm script cho xử lý form liên hệ nếu cần -->
+
+</body>
+</html>
